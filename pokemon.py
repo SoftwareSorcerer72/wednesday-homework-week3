@@ -9,6 +9,9 @@ class Pokemon:
         self.stats = stats
         self.img_url = img_url
 
+    def __repr__(self):
+        return f'Pokemon: {self.id} | {self.name}'
+
 class PokemonAPI:
     main_url = "https://pokeapi.co/api/v2/"
 
