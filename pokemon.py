@@ -13,7 +13,14 @@ class PokemonAPI:
     
 def get_info(self, pokemon_name):
         
-        info = self.__get('pokemon', pokemon_name)
+        info = self.__get('pokemon', pokemon_name.lower())
+        if info:
+            poke_id = info.get('id')
+            name = info.get('name')
+            height = info.get('height')
+            weight = info.get('weight')
+            stats = info.get('stats')
+            sprites = info.get('sprites')
 
 client = PokemonAPI()
 
