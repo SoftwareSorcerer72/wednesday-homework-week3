@@ -1,5 +1,14 @@
 import requests
 
+class Pokemon:
+     def  __init__(self, poke_id, name, height, weight, stats, img_url):
+        self.poke_id = poke_id
+        self.name = name.title()
+        self.height = height
+        self.weight = weight
+        self.stats = stats
+        self.img_url = img_url
+
 class PokemonAPI:
     main_url = "https://pokeapi.co/api/v2/"
 
@@ -20,7 +29,7 @@ def get_info(self, pokemon_name):
             height = info.get('height')
             weight = info.get('weight')
             stats = info.get('stats')
-            sprites = info.get('sprites')
+            img_url = info.get('sprites').get('front_default')
 
 client = PokemonAPI()
 
