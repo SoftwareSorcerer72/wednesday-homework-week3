@@ -1,7 +1,7 @@
 import requests
-
+from ascii_magic import AsciiArt
 class Pokemon:
-     def  __init__(self, poke_id, name, height, weight, stats, img_url):
+    def  __init__(self, poke_id, name, height, weight, stats, img_url):
         self.poke_id = poke_id
         self.name = name.title()
         self.height = height
@@ -11,6 +11,11 @@ class Pokemon:
 
     def __repr__(self):
         return f'Pokemon: {self.id} | {self.name}'
+
+    def __str__(self):
+        art = AsciiArt.from_url(self.img_url)
+        art_string = art.to_ascii()
+        return f"{art_string}/nName: {self.poke_id}/nHeight: {self.height}/nWeight: {self.weight}/nStats: {self.stats}"
 
 class PokemonAPI:
     main_url = "https://pokeapi.co/api/v2/"
@@ -23,7 +28,7 @@ class PokemonAPI:
         else:
             return None
     
-def get_info(self, pokemon_name):
+    def get_info(self, pokemon_name):
         
         info = self.__get('pokemon', pokemon_name.lower())
         if info:
@@ -33,6 +38,16 @@ def get_info(self, pokemon_name):
             weight = info.get('weight')
             stats = info.get('stats')
             img_url = info.get('sprites').get('front_default')
+            new_pokemon = Pokemon(poke_id, name, height, weight, stats, img_url)
+            return new_pokemon
+
 
 client = PokemonAPI()
+
+while True:
+    poke_id = input("Enter a Pokemon name: ")
+    if poke_id == 'exit':
+        break
+    pokemon = client.get_info(poke_id)
+    print(pokemon)
 
