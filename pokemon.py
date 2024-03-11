@@ -11,5 +11,9 @@ class PokemonAPI:
         else:
             return None
     
+def get_info(self, pokemon_name):
+        
+        info = self.__get('pokemon', pokemon_name)
+
 client = PokemonAPI()
 
